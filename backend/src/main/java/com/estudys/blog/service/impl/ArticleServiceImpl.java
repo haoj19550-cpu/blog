@@ -94,6 +94,9 @@ public class ArticleServiceImpl implements ArticleService {
 
     @Override
     public PageResponse<ArticleListItem> listArticles(ArticleListQuery query) {
+        if (query == null) {
+            query = new ArticleListQuery();
+        }
         int pageNum = query.getPageNum() == null || query.getPageNum() < 1 ? 1 : query.getPageNum();
         int pageSize = query.getPageSize() == null || query.getPageSize() < 1 ? 10 : Math.min(query.getPageSize(), 50);
         IPage<Article> page = articleMapper.selectPage(

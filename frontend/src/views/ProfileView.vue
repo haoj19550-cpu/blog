@@ -27,6 +27,9 @@ const loadArticles = async () => {
     })
     list.value = data.list || []
     total.value = data.total || 0
+  } catch {
+    list.value = []
+    total.value = 0
   } finally {
     loading.value = false
   }
@@ -50,7 +53,9 @@ const handlePageChange = async (pageNum: number) => {
   await loadArticles()
 }
 
-onMounted(loadArticles)
+onMounted(() => {
+  void loadArticles()
+})
 </script>
 
 <template>
