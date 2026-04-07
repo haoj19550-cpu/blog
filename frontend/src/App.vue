@@ -33,36 +33,36 @@ onBeforeUnmount(() => {
 </script>
 
 <template>
-  <div class="app-bg-glow" />
-  <div class="app-bg-glow app-bg-glow--secondary" />
-
   <div class="app-layout">
     <header class="app-nav-wrap">
       <div class="app-nav">
-        <RouterLink to="/" class="brand">Neo Gradient Blog</RouterLink>
+        <RouterLink to="/" class="brand">三元壹辛</RouterLink>
         <nav class="nav-links">
           <RouterLink to="/" class="nav-link">首页</RouterLink>
+          <RouterLink to="/" class="nav-link">分类</RouterLink>
+          <RouterLink to="/" class="nav-link">标签</RouterLink>
+          <RouterLink to="/" class="nav-link">归档</RouterLink>
+          <RouterLink to="/" class="nav-link">关于</RouterLink>
           <RouterLink v-if="authed" to="/editor" class="nav-link">写文章</RouterLink>
           <RouterLink v-if="authed" to="/profile" class="nav-link">个人中心</RouterLink>
         </nav>
 
         <div class="auth-actions">
+          <button class="icon-btn" type="button" aria-label="search">⌕</button>
           <template v-if="authed">
             <span class="user-chip">{{ currentUser?.nickname || currentUser?.username || '已登录用户' }}</span>
-            <button class="ghost-btn" type="button" @click="handleLogout">退出登录</button>
+            <button class="text-btn" type="button" @click="handleLogout">退出</button>
           </template>
           <template v-else>
-            <RouterLink class="ghost-btn" :to="`/login?redirect=${redirectAfterLogin}`">登录</RouterLink>
-            <RouterLink class="solid-btn" to="/register">注册</RouterLink>
+            <RouterLink class="text-btn" :to="`/login?redirect=${redirectAfterLogin}`">登录</RouterLink>
+            <RouterLink class="text-btn" to="/register">注册</RouterLink>
           </template>
         </div>
       </div>
     </header>
 
     <main class="app-main">
-      <div class="app-content-card">
-        <router-view />
-      </div>
+      <router-view />
     </main>
   </div>
 </template>

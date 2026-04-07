@@ -32,6 +32,7 @@ onMounted(() => {
     <el-skeleton :loading="loading" animated :rows="8">
       <template #default>
         <div v-if="article" class="detail-wrap">
+          <RouterLink class="detail-back-link" to="/">← 返回首页</RouterLink>
           <div class="detail-head">
             <h1>{{ article.title }}</h1>
             <div class="detail-actions">
