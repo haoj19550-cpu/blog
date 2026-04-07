@@ -15,12 +15,16 @@ const loadDetail = async () => {
   loading.value = true
   try {
     article.value = await getArticleDetailApi(id)
+  } catch {
+    article.value = null
   } finally {
     loading.value = false
   }
 }
 
-onMounted(loadDetail)
+onMounted(() => {
+  void loadDetail()
+})
 </script>
 
 <template>
