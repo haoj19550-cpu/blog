@@ -4,7 +4,7 @@ import type { ApiResponse } from '../types/api'
 import { getToken, logout } from '../utils/auth'
 
 const http = axios.create({
-  baseURL: import.meta.env.VITE_API_BASE_URL ?? 'http://localhost:8080',
+  baseURL: import.meta.env.VITE_API_BASE_URL ?? '/api',
   timeout: 10000,
 })
 
