@@ -508,10 +508,16 @@ body {
   color: #313131;
 }
 
-.article-entry-summary {
+.article-entry-summary,
+.article-entry-content {
   margin: 10px 0 0;
   color: #666;
   line-height: 1.8;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .article-author-line {

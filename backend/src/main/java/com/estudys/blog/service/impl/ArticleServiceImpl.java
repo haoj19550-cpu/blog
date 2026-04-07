@@ -22,7 +22,9 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
 
 import java.util.ArrayList;
+import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 @Service
@@ -67,7 +69,7 @@ public class ArticleServiceImpl implements ArticleService {
         article.setStatus(request.getStatus() == null ? 0 : request.getStatus());
         articleMapper.updateById(article);
 
-        articleTagMapper.delete(new LambdaQueryWrapper<ArticleTag>().eq(ArticleTag::getArticleId, articleId));
+        articleTagMapper.physicalDeleteByArticleId(articleId);
         saveArticleTags(articleId, request.getTagIds());
     }
 
@@ -131,8 +133,9 @@ public class ArticleServiceImpl implements ArticleService {
         if (tagIds == null || tagIds.isEmpty()) {
             return;
         }
-        for (Long tagId : tagIds) {
-            if (tagId == null) {
+        Set<Long> uniqueTagIds = new LinkedHashSet<>(tagIds);
+        for (Long tagId : uniqueTagIds) {
+            if (tagId == null || tagId <= 0) {
                 continue;
             }
             ArticleTag articleTag = new ArticleTag();
@@ -146,6 +149,7 @@ public class ArticleServiceImpl implements ArticleService {
         ArticleListItem item = new ArticleListItem();
         item.setId(article.getId());
         item.setTitle(article.getTitle());
+        item.setContent(article.getContent());
         item.setSummary(article.getSummary());
         item.setCategoryId(article.getCategoryId());
         item.setCoverImage(article.getCoverImage());

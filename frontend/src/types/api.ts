@@ -44,6 +44,7 @@ export interface ArticleListQuery {
 export interface ArticleListItem {
   id: string
   title: string
+  content?: string
   summary?: string
   coverImage?: string
   viewCount?: number

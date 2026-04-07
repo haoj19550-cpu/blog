@@ -111,7 +111,7 @@ onMounted(() => {
           <h3 class="article-entry-title" @click="goDetail(item.id)">
             {{ item.title }}
           </h3>
-          <p class="article-entry-summary">{{ item.summary || '作者还没有填写摘要。' }}</p>
+          <p class="article-entry-content">{{ item.content || '作者还没有填写正文内容。' }}</p>
           <div class="article-author-line">
             <span class="article-avatar-mini">{{ authorName[0] }}</span>
             <span>{{ authorName }}</span>

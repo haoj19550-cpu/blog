@@ -9,6 +9,7 @@ import java.util.List;
 public class ArticleListItem {
     private Long id;
     private String title;
+    private String content;
     private String summary;
     private Long categoryId;
     private String coverImage;

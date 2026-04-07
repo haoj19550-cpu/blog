@@ -48,7 +48,6 @@ onBeforeUnmount(() => {
         </nav>
 
         <div class="auth-actions">
-          <button class="icon-btn" type="button" aria-label="search">⌕</button>
           <template v-if="authed">
             <span class="user-chip">{{ currentUser?.nickname || currentUser?.username || '已登录用户' }}</span>
             <button class="text-btn" type="button" @click="handleLogout">退出</button>
