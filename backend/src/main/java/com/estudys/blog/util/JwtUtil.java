@@ -1,6 +1,8 @@
 package com.estudys.blog.util;
 
+import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.JwtException;
 import io.jsonwebtoken.security.Keys;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
@@ -28,6 +30,26 @@ public class JwtUtil {
                 .expiration(Date.from(expireAt))
                 .signWith(secretKey())
                 .compact();
+    }
+
+    public Long parseUserId(String token) {
+        try {
+            Claims claims = Jwts.parser()
+                    .verifyWith(secretKey())
+                    .build()
+                    .parseSignedClaims(token)
+                    .getPayload();
+            Object userId = claims.get("userId");
+            if (userId instanceof Number number) {
+                return number.longValue();
+            }
+            if (userId instanceof String text) {
+                return Long.parseLong(text);
+            }
+            throw new JwtException("invalid userId claim");
+        } catch (Exception e) {
+            throw new JwtException("invalid token", e);
+        }
     }
 
     private SecretKey secretKey() {
